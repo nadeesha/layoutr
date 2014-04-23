@@ -1,0 +1,12 @@
+# vim editing
+*.swp
+.tern-port
+
+# note_modules
+node_modules
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/

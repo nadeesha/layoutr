@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Summernote - Super Simple WYSIWYG editor on Bootstrap</title>
+  <meta name="description" content="Super Simple WYSIWYG Editor on Bootstrap">
+  <meta name="author" content="https://github.com/HackerWins">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="//twitter.github.io/bootstrap/assets/js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- include jquery and bootstrap and font-awesome -->
+  <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- include (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css">
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+
+  <!-- include summernote -->
+  <link href="summernote-dist/summernote.css" rel="stylesheet">
+  <script src="summernote-dist/summernote.min.js"></script>
+
+  <!-- include page style and script -->
+  <link href="page.css" rel="stylesheet">
+  <script type="text/javascript" src="page.js"> </script>
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/tomorrow.min.css"/>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
+</head>
+<body>
+<!-- navbar -->
+<div class="navbar navbar-default navbar-fixed-top bs-page-navbar" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="./"><i class="fa fa-sun-o"></i> Summernote</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="example.html">Example</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="subhead container">
+  <h2>Code Example</h2>
+  <p class="muted">Here are some useful code examples.</p>
+</div>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="bs-page-sidebar" role="complementary">
+        <ul class="nav">
+          <li><a href="#multiple">Multiple Editor</a></li>
+          <li><a href="#click2edit">Click to Edit</a></li>
+          <li><a href="#codemirror">CodeMirror as CodeView</a></li>
+          <li><a href="#theme">Theme</a></li>
+          <!-- Upcoming Features
+          <li><a href="#local">Local Storage</a></li>
+          -->
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <section>
+        <h2 id="multiple">Multiple Editor</h2>
+        <p>To display multiple editors on a page, you need to place more than two <code>div</code> elements in HTML.</p>
+        <pre><code class="xml">&lt;div class="summernote"&gt;summernote 1&lt;/div&gt;
+&lt;div class="summernote"&gt;summernote 2&lt;/div&gt;</code></pre>
+        <p>Then run summernote with jQuery selector.</p>
+        <pre><code class="javascript">$(document).ready(function() {
+  $('.summernote').summernote();
+});</code></pre>
+        <h4>Example</h4>
+        <div class="multiple">summernote 1</div>
+        <p></p>
+        <div class="multiple">summernote 2</div>
+        <script>
+          $(document).ready(function() {
+            $('.multiple').summernote();
+          });
+        </script>
+      </section>
+      <hr/>
+      <section>
+        <h2 id="click2edit">Click to Edit</h2>
+        <p>You can edit content on the fly.</p>
+        <h5>HTML:</h5>
+        <pre><code class="xml">&lt;button id="edit" class="btn btn-primary" onclick="edit()" type="button"&gt;Edit 1&lt;/button&gt;
+&lt;button id="save" class="btn btn-primary" onclick="save()" type="button"&gt;Save 2&lt;/button&gt;
+&lt;div class="click2edit"&gt;click2edit&lt;/div&gt;</code></pre>
+        <h5>Script:</h5>
+        <pre><code class="javascript">var edit = function() {
+  $('.click2edit').summernote({focus: true});
+};
+var save = function() {
+  var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+  $('.click2edit').destroy();
+};</code></pre>
+        <h4>Example</h4>
+        <p>
+          <button id="edit" class="btn btn-primary" onclick="edit()" type="button">Edit</button>
+          <button id="save" class="btn btn-primary" onclick="save()" type="button">Save</button>
+        </p>
+        <p></p>
+        <div class="click2edit"><pre><code class="javascript">var edit = function() {
+  $('.click2edit').summernote();
+};</code></pre></div>
+        <script>
+          var edit = function() {
+            $('.click2edit').summernote({focus: true});
+          };
+          var save = function() {
+            $('.click2edit').destroy();
+          };
+        </script>
+      </section>
+      <section>
+        <h2 id="codemirror">CodeMirror as Codeview</h2>
+        <p>If you include a <code>CodeMirror</code> on a page, you can use CodeMirror to Codeview.</p>
+        <p>Include jQuery, Bootstrap, font-awesome and <b>CodeMirror</b> with summernote.</p>
+        <pre><code class="xml">&lt;!-- include libries(jQuery, bootstrap, fontawesome) --&gt;
+&lt;script src="//code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt; 
+&lt;link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"&gt; 
+&lt;script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"&gt;&lt;/script&gt; 
+&lt;link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"&gt;
+
+&lt;!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) --&gt;
+&lt;link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css" /&gt;
+&lt;script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- include summernote css/js--&gt;
+&lt;link href="summernote.css" /&gt;
+&lt;script src="summernote.min.js"&gt;&lt;/script&gt;</code></pre>
+<p>Initialize Summernote with codemirror options</p>
+<pre><code class="javascript">$('.summernote').summernote({
+  height: 150,   //set editable area's height
+  codemirror: { // codemirror options
+    theme: 'monokai'
+  }
+});</code></pre>
+        <textarea class="codemirror">Click <b>Code View</b>!!!</textarea>
+        <script>
+          $(document).ready(function() {
+            $('.codemirror').summernote({
+              height: 150,
+              codemirror: { // codemirror options
+                theme: 'monokai'
+              }
+            });
+          });
+        </script>
+        <p></p>
+        <p><a href="http://codemirror.net/">CodeMirror</a> is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.</p>
+      </section>
+
+      <section>
+        <h2 id="theme">Theme</h2>
+        <p>Style changed accroding to bootstrap theme.</p>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">cosmo</h3>
+          </div>
+          <div class="panel-body">
+            <iframe src="theme.html#cosmo" width="100%" height="100" frameborder="0"></iframe>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">flatly</h3>
+          </div>
+          <div class="panel-body">
+            <iframe src="theme.html#flatly" width="100%" height="100" frameborder="0"></iframe>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">spacelab</h3>
+          </div>
+          <div class="panel-body">
+            <iframe src="theme.html#spacelab" width="100%" height="100" frameborder="0"></iframe>
+          </div>
+        </div>
+        <p>More bootstrap theme: <a href="http://bootswatch.com/" target="_blank">Bootswatch <i class="fa fa-external-link"></i></a></p>
+      </section>
+      <hr/>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p><i class="fa fa-sun-o"></i> Summernote v0.5 · Created and Maintained by <a href="https://twitter.com/hackerwins">Alan</a></p>
+    <p>Based on <a href="http://twitter.github.io/bootstrap/">Bootstrap</a> and <a href="http://jquery.com/">jQuery</a>. Icons from <a href="http://fontawesome.io/">Font Awesome</a>. Theme from <a href="http://bootswatch.com">bootswatch</a>.</p>
+    <p>Summernote distributed under the MIT license.</p>
+    <p></p>
+    <p><a href="https://github.com/HackerWins/summernote">GitHub Project</a> · <a href="https://github.com/HackerWins/summernote/issues">Issues</a></p>
+  </div>
+</footer>
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-42438082-1', 'github.com');
+  ga('send', 'pageview');
+</script>
+<!-- highlight.js -->
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

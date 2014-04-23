@@ -3,50 +3,86 @@
 <head>
     <link rel="stylesheet" type="text/css" href="./app/bower_components/gridster/dist/jquery.gridster.css">
     <link rel="stylesheet" type="text/css" href="./app.css">
+    <link rel="stylesheet" type="text/css" href="./app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="./app/bower_components/summernote/summernote-dist/summernote.css">
     <title></title>
 </head>
 
 <body>
+    <button id="lr-add-box" type="button" class="btn btn-default">+</button>
+
     <div class="gridster">
         <ul>
-            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"></li>
-            <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"></li>
-            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"></li>
-
-            <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"></li>
-            <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"></li>
-
-            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"></li>
-            <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"></li>
-            <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"></li>
-
-            <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"></li>
-            <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"></li>
-
-            <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"></li>
-            <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"></li>
-            <li data-row="1" data-col="7" data-sizex="1" data-sizey="1"></li>
-            <li data-row="2" data-col="7" data-sizex="1" data-sizey="1"></li>
-            <li data-row="3" data-col="7" data-sizex="1" data-sizey="1"></li>
-
-            <li data-row="1" data-col="8" data-sizex="2" data-sizey="1"></li>
-            <li data-row="2" data-col="8" data-sizex="2" data-sizey="2"></li>
-
-            <li data-row="1" data-col="9" data-sizex="1" data-sizey="1"></li>
-            <li data-row="2" data-col="9" data-sizex="2" data-sizey="1"></li>
-            <li data-row="3" data-col="9" data-sizex="1" data-sizey="1"></li>
-
-            <li data-row="1" data-col="10" data-sizex="1" data-sizey="1"></li>
-            <li data-row="3" data-col="10" data-sizex="1" data-sizey="1"></li>
-
-            <li data-row="1" data-col="11" data-sizex="1" data-sizey="1"></li>
-            <li data-row="2" data-col="11" data-sizex="1" data-sizey="2"></li>
+            <li class="lr-box" data-row="1" data-col="1" data-sizex="3" data-sizey="5"></li>
+            <li class="lr-box" data-row="2" data-col="1" data-sizex="9" data-sizey="5"></li>
         </ul>
     </div>
 
+    <div id="lr-ui-components" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Insert Component</h4>
+                </div>
+                <div class="modal-body">
+                    <button type="button" class="btn btn-primary lr-component" name="tabs">Tabs</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div id="lr-ui-code" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Edit HTML</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="summernote"></div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="hide">
+        <div id="lr-html-tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Home</a>
+                </li>
+                <li><a href="#profile" data-toggle="tab">Profile</a>
+                </li>
+                <li><a href="#messages" data-toggle="tab">Messages</a>
+                </li>
+                <li><a href="#settings" data-toggle="tab">Settings</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="padding:10px;">
+                <div class="tab-pane active lr-box" id="home">This is the Home tab</div>
+                <div class="tab-pane lr-box" id="profile">This is the Profile tab</div>
+                <div class="tab-pane lr-box" id="messages">This is the Messages tab</div>
+                <div class="tab-pane lr-box" id="settings">This is the Settings tab</div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="./app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./app/bower_components/gridster/dist/jquery.gridster.js"></script>
+    <script src="./app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="./app.js"></script>
+    <script src="./app/bower_components/summernote/summernote-dist/summernote.min.js"></script>
 </body>
 
 </html>

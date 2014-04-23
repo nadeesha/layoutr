@@ -1,4 +1,16 @@
-.gridster li {
-	background-color: gray;
+.gridster .lr-box {
+	background-color: white;
+	border: 1px lightgray solid;
+	padding: 10px;
 	list-style: none;
+}
+
+.lr-manipulate {
+	float: right;
+	cursor: pointer;
+	z-index: 999;
+}
+
+.glyphicon {
+	margin-left: 5px;
 }

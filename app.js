@@ -1,10 +1,22 @@
+window.layoutr = {
+	components: {}
+};
+
 $(function() {
 	'use strict';
 	/*jshint camelcase: false */
 
 	(function() {
 
-		(function layoutGridster() {
+		var componentsModal = $('#lr-ui-components');
+		var codeModal = $('#lr-ui-code');
+
+		var $box = null;
+
+		var plusButton = $('<span class="glyphicon glyphicon-plus lr-manipulate lr-plus-btn"></span>');
+		var editButton = $('<span class="glyphicon glyphicon-edit lr-manipulate lr-edit-btn"></span>');
+
+		(function initializeGridster() {
 			$('.gridster ul').gridster({
 				widget_margins: [10, 10],
 				widget_base_dimensions: [100, 100],
@@ -15,39 +27,34 @@ $(function() {
 			});
 		})();
 
-		var gridster = $('.gridster ul').gridster().data('gridster');
-		var componentsModal = $('#lr-ui-components');
-		var codeModal = $('#lr-ui-code');
-		var activeBox;
-		var plusButton = $('<span class="glyphicon glyphicon-plus lr-manipulate lr-plus-btn"></span>');
-		var editButton = $('<span class="glyphicon glyphicon-edit lr-manipulate lr-edit-btn"></span>');
+		window.layoutr.gridster = $('.gridster ul').gridster().data('gridster');
 
-		function insertComponent(e) {
+		function applyUIComponent(e) {
 			if (e.target === e.currentTarget) {
-				if (e.target.name === 'tabs') {
-					insertTabs();
+				var componentName = e.target.name;
+
+				if (e.target.name && window.layoutr.components.hasOwnProperty(componentName)) {
+					var componentToApply = window.layoutr.components[componentName];
+
+					var config = {
+						$element: $box
+					};
+
+					componentToApply.init(config, function() {
+						console.debug('init called for ' + componentName);
+					});
 				}
 			}
 		}
 
-		function insertTabs() {
-			var tabs = $('#lr-html-tabs').clone();
-			tabs.attr('id', generateRandomId());
-			activeBox.append(tabs);
-		}
-
 		function openComponentsModal(e) {
-			activeBox = $(e.target.parentElement);
-			componentsModal.modal();
-		}
-
-		function generateRandomId() {
-			return Math.floor(Math.random() * 999999) + 1;
+			$box = $(e.target.parentElement);
+			componentsModal.modal('show');
 		}
 
 		function openCodeModal(e) {
-			activeBox = $(e.target.parentElement);
-			var html = activeBox.html();
+			$box = $(e.target.parentElement);
+			var html = $box.html();
 			$('.summernote').summernote({
 				height: 300,
 				focus: true
@@ -56,20 +63,26 @@ $(function() {
 			codeModal.modal();
 		}
 
+		function appendUtilityButtons(elem) {
+			var plus = plusButton.clone();
+			var edit = editButton.clone();
+			$(elem).append(plus);
+			$(elem).append(edit);
+		}
+
 		$('#lr-add-box').click(function() {
-			gridster.add_widget('<li class="new">The HTML of the widget...</li>', 2, 1);
+			var widget = $('<li class="lr-box">The HTML of the widget...</li>');
+			window.layoutr.gridster.add_widget('<li class="lr-box">The HTML of the widget...</li>', 2, 1);
 		});
 
-		$(document).on('click', '.lr-component', insertComponent);
+		$(document).on('click', '.lr-component', applyUIComponent);
 		$(document).on('click', '.lr-plus-btn', openComponentsModal);
 		$(document).on('click', '.lr-edit-btn', openCodeModal);
 
-		// add a '+' button to all of the gridster boxes
 		$('.lr-box').each(function addPlusButton() {
-			var plus = plusButton.clone();
-			var edit = editButton.clone();
-			$(this).append(plus);
-			$(this).append(edit);
+			appendUtilityButtons(this);
 		});
+
+
 	})();
 });

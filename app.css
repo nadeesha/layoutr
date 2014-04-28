@@ -11,6 +11,24 @@
 	z-index: 999;
 }
 
+.lr-edit-btn {
+	text-align: right;
+	cursor: pointer;
+	z-index: 999;
+}
+
 .glyphicon {
 	margin-left: 5px;
+}
+
+#lr-modal-code .modal-dialog {
+	width: 80%;
+	height: 400px;
+}
+
+.lr-code-box {
+	background-color: gray;
+	font-family: 'Courier New';
+	color: darkgray;
+	border: 1px solid darkgray;
 }

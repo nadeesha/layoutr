@@ -4,8 +4,9 @@
     <link rel="stylesheet" type="text/css" href="./app/bower_components/gridster/dist/jquery.gridster.css">
     <link rel="stylesheet" type="text/css" href="./app.css">
     <link rel="stylesheet" type="text/css" href="./app/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="./app/bower_components/summernote/summernote-dist/summernote.css">
+    <link rel="stylesheet" type="text/css" href="./app/bower_components/codemirror/lib/codemirror.css"></script>
+    <link rel="stylesheet" type="text/css" href="./app/bower_components/codemirror/theme/monokai.css"></script>
+
     <title></title>
 </head>
 
@@ -14,8 +15,8 @@
 
     <div class="gridster">
         <ul>
-            <li class="lr-box" data-row="1" data-col="1" data-sizex="3" data-sizey="5"></li>
-            <li class="lr-box" data-row="2" data-col="1" data-sizex="9" data-sizey="5"></li>
+            <li class="lr-box" data-row="1" data-col="1" data-sizex="3" data-sizey="5"><div class="lr-content"></div></li>
+            <li class="lr-box" data-row="2" data-col="1" data-sizex="9" data-sizey="5"><div class="lr-content"></div></li>
         </ul>
     </div>
 
@@ -27,7 +28,8 @@
                     <h4 class="modal-title">Insert Component</h4>
                 </div>
                 <div class="modal-body">
-                    <button type="button" class="btn btn-primary lr-component" name="tabs">Tabs</button>
+                    <button type="button" class="btn btn-primary lr-component-insert-button" name="tabs">Tabs</button>
+                    <button type="button" class="btn btn-primary lr-component-insert-button" name="jagapp">Jaggery App</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -36,15 +38,10 @@
     </div>
     <!-- /.modal -->
 
-    <div id="lr-ui-code" class="modal fade">
+    <div id="lr-modal-code" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit HTML</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="summernote"></div>
+                <div id="lr-code-editor-div" class="modal-body">
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -56,10 +53,12 @@
     <script src="./app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./app/bower_components/gridster/dist/jquery.gridster.js"></script>
     <script src="./app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./app/bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="./app/bower_components/codemirror/mode/javascript/javascript.js"></script>
     <script src="./app.js"></script>
-    <script src="./app/bower_components/summernote/summernote-dist/summernote.min.js"></script>
 
     <script src="./components/tabs/tabs.js"></script>
+    <script src="./components/jagapp/jagapp.js"></script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
 }
 
 .lr-edit-btn {
-	text-align: right;
+	float: right;
 	cursor: pointer;
 	z-index: 999;
 }
@@ -31,4 +31,8 @@
 	font-family: 'Courier New';
 	color: darkgray;
 	border: 1px solid darkgray;
+}
+
+.lr-component-container {
+	padding: 20px;
 }

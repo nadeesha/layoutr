@@ -78,13 +78,24 @@ $(function initalizePage() {
 				},
 				serialize_params: function($w, wgd) {
 					var componentIds = [];
+					var code = '';
 
 					$w.find('.lr-content').children().each(function(idx, elem) {
 						componentIds.push($(elem).attr('id'));
+
+						var component = _.find(insertedComponents, function(cmp) {
+							return cmp.containerId === $(elem).attr('id');
+						});
+
+						code += component.componentInstance.get();
 					});
 
+					var id = parseInt(Math.random() * 100000);
+
 					return {
+						id: id,
 						componentIds: componentIds,
+						code: code,
 						col: wgd.col,
 						row: wgd.row,
 						size_x: wgd.size_x,

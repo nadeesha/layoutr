@@ -1,0 +1,21 @@
+<%
+var log = new Log('generate_files.jag');
+log.info('-------------------');
+log.info(request.getContent());
+log.info('-------------------');
+log.info(typeof request.getContent());
+
+var layout = request.getContent();
+
+var output;
+
+layout.forEach(function(box) {
+	var file = new File('/component-gen/' + box.id + '.jag');
+	file.open("w");
+	file.write(box.code);
+	file.close();
+});
+
+response.status = 200;
+response.content = '{}';
+%>

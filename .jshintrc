@@ -4,7 +4,7 @@
   // Documentation: http://www.jshint.com/docs/
   "browser": true,
   "esnext": true,
-  "globals": {"$": false, "moment": false, "_": false, "IN": false, "CodeMirror": false, "console": false},
+  "globals": {"$": false, "moment": false, "_": false, "IN": false, "CodeMirror": false, "console": false, "bsgridster": false},
   "globalstrict": true,
   "quotmark": true,
   "smarttabs": true,

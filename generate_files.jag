@@ -9,13 +9,16 @@ var layout = request.getContent();
 
 var output;
 
+var file = new File('/component-gen/rendered.jag');
+file.open("w");
+
 layout.forEach(function(box) {
-	var file = new File('/component-gen/' + box.id + '.jag');
-	file.open("w");
+	file.write('<script type="text/lr-template" id="' + box.id + '">');
 	file.write(box.code);
-	file.close();
+	file.write('</script>');
 });
 
+file.close();
+
 response.status = 200;
-response.content = '{}';
-%>
+response.content = '{}'; %>

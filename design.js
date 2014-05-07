@@ -159,7 +159,8 @@ $(function initalizePage() {
 		}
 
 		function saveLayout() {
-			serialize();
+			serializeAndSave();
+			generateElements();
 		}
 
 		$('#lr-add-box').click(function() {
@@ -176,7 +177,7 @@ $(function initalizePage() {
 		$(document).on('click', '.lr-edit-btn', openCodeModal);
 		$(document).on('click', '.lr-save-btn', saveLayout);
 
-		function serialize() {
+		function serializeAndSave() {
 			var gridsterLayout = window.layoutr.gridster.serialize();
 
 			var components = [];
@@ -195,6 +196,25 @@ $(function initalizePage() {
 			};
 
 			localStorage.setItem('page', JSON.stringify(page));
+		}
+
+		function generateElements() {
+			var layout;
+
+			(function loadLayout() {
+				layout = JSON.parse(localStorage.getItem('page'));
+			})();
+
+			$.ajax({
+				url: 'generate_files.jag',
+				method: 'PUT',
+				contentType: 'application/json',
+				dataType: 'json',
+				data: JSON.stringify(layout.gridsterLayout),
+				success: function() {
+					console.debug('Saved!');
+				}
+			});
 		}
 
 		(function loadLayout() {

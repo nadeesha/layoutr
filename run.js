@@ -1,38 +1,30 @@
 $(function() {
 	'use strict';
 
-	var layout;
+	var layout = JSON.parse(localStorage.getItem('page'));
 
-	(function loadLayout() {
-		layout = JSON.parse(localStorage.getItem('page'));
-	})();
+	var bootstrapLayout = new bsgridster(layout.gridsterLayout, null, 'lr-box');
+	console.debug(bootstrapLayout.getHtml());
+	$('#lr-grid').html(bootstrapLayout.getHtml());
 
 	$.ajax({
-		url: 'generate_files.jag',
-		method: 'PUT',
-		contentType: 'application/json',
-		dataType: 'json',
-		data: JSON.stringify(layout.gridsterLayout),
-		success: function() {
-			setupPage();
+		url: 'component-gen/rendered.jag',
+		method: 'GET',
+		success: function(data) {
+			var $componentHtml = $(data);
+			fillHtml($componentHtml);
 		}
 	});
 
-	function setupPage() {
-		var bootstrapLayout = new bsgridster(layout.gridsterLayout, null, 'lr-box');
-		console.debug(bootstrapLayout.getHtml());
-		$('#lr-grid').html(bootstrapLayout.getHtml());
+	function fillHtml($componentHtml) {
+		var components = {};
+
+		$componentHtml.each(function() {
+			components[this.id] = this.innerHTML;
+		});
 
 		$.each($('.lr-box'), function() {
-			var box = this;
-
-			$.ajax({
-				url: 'component-gen/' + box.id + '.jag',
-				method: 'GET',
-				success: function(data) {
-					$(box).html(data);
-				}
-			});
+			$(this).html(components[this.id]);
 		});
 	}
 });
